@@ -5,12 +5,14 @@ import { validUserData, invalidData } from "../../data/apidata";
 
 
 test.describe('Api tests', async ()=> {
-    
+
+  test.describe.configure({retries: 2});
+  
     let api: ApiRequests;
     let token: string;
 
-    // Run tests in order, in the same worker process.
-    test.describe.configure({ mode: "default" });
+    // // Run tests in order, in the same worker process.
+    // test.describe.configure({ mode: "default" });
 
     test.beforeEach('set up', async ({request}) => {
         api = new ApiRequests(request)

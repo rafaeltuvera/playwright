@@ -41,10 +41,12 @@ export type getCustomerByIdResponse ={
 export class ApiRequests {
     private request: APIRequestContext;
     private url: string;
+    private auth : string;
 
     constructor(request: APIRequestContext, url = 'https://www.quickpickdeal.com/api'){
         this.url = url;
         this.request = request;
+        this.auth = `${process.env.TEST_TOKEN}`
     }
 
     async getToken() : Promise<getTokenResponse>{
@@ -67,7 +69,7 @@ export class ApiRequests {
             return body!;
     }
 
-    async getCustomerById (id: number, token: string){
+    async getCustomerById (id: number, token?: string){
         let body: getCustomerByIdResponse | undefined;
 
         await expect
